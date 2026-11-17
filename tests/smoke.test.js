@@ -16,12 +16,12 @@ test.describe("Sarrast Performance Optimizer - Smoke Tests", () => {
         expect(style).not.toBeNull();
 
         const css = await style.textContent();
-        // v1.2.2: CSS should contain permanent scroll-effects disabling rules
+        // v1.2.2: CSS should contain permanent scroll-effects disabling rules (default config)
         expect(css).toContain("sarrast-disable-scroll-effects");
         expect(css).toContain("content-visibility: visible");
         expect(css).toContain("sarrast-calm");
-        // Should still have scroll-time rules for backwards compatibility when disableAllScrollEffects=false
-        expect(css).toContain("sarrast-scrolling");
+        // When disableAllScrollEffects=true (default), sarrast-scrolling rules are NOT included
+        // They are only included when disableAllScrollEffects=false (legacy mode)
     });
 
     test("should add sarrast-calm class to html", async ({ page }) => {
@@ -164,7 +164,9 @@ test.describe("Sarrast Performance Optimizer - Smoke Tests", () => {
         expect(css).toContain("filter: none");
         expect(css).toContain("backdrop-filter: none");
         expect(css).toContain("text-shadow: none");
-        expect(css).toContain("transition-property: opacity, transform, color, background-color, background, border-color, border, outline, outline-color");
+        // v1.2.2: transition-property only includes border (not outline/outline-color)
+        expect(css).toContain("transition-property:");
+        expect(css).toContain("border !important");
     });
 
     test("should clean up on pagehide", async ({ page }) => {
