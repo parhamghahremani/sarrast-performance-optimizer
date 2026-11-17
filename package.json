@@ -1,0 +1,34 @@
+{
+  "name": "sarrast-performance-optimizer",
+  "version": "1.2.3",
+  "description": "Performance and scrolling optimization userscript for Sarrast (Manhwa/Comic reader)",
+  "main": "src/sarrast-performance-optimizer.user.js",
+  "scripts": {
+    "lint": "eslint src/",
+    "format": "prettier --write src/",
+    "test": "playwright test",
+    "build": "node build.js",
+    "release": "npm run lint && npm run test && npm run build"
+  },
+  "keywords": [
+    "userscript",
+    "tampermonkey",
+    "greasemonkey",
+    "performance",
+    "optimization",
+    "sarrast",
+    "manhwa",
+    "comic"
+  ],
+  "author": "parham <https://github.com/parhamghahremani>",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

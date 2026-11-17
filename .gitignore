@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+versions/
+
+# Test artifacts
+test-results/
+playwright-report/
+
+# Local backups (never commit)
+backups/
+
+# Logs
+*.log
+
+# Environment files
+.env*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
