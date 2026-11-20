@@ -9,6 +9,9 @@ import path from "path";
 const SRC_FILE = "src/sarrast-performance-optimizer.user.js";
 const VERSIONS_DIR = "versions";
 const DIST_DIR = "dist";
+const REPO = "sarrast-performance-optimizer";
+const OWNER = "parhamghahremani";
+const BRANCH = "master";
 
 function readVersion() {
     const content = fs.readFileSync(SRC_FILE, "utf-8");
@@ -42,14 +45,15 @@ function build() {
     console.log(`Created dist file: ${distFile}`);
 
     // Update download/update URLs in dist file to point to versioned release
+    const versionedUrl = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/versions/sarrast-performance-optimizer-v${version}.user.js`;
     let distContent = content
         .replace(
             /@downloadURL\s+.*/,
-            `@downloadURL  https://github.com/parhamghahremani/userscripts/raw/main/sarrast-performance-optimizer/versions/sarrast-performance-optimizer-v${version}.user.js`
+            `@downloadURL  ${versionedUrl}`
         )
         .replace(
             /@updateURL\s+.*/,
-            `@updateURL    https://github.com/parhamghahremani/userscripts/raw/main/sarrast-performance-optimizer/versions/sarrast-performance-optimizer-v${version}.user.js`
+            `@updateURL    ${versionedUrl}`
         );
 
     fs.writeFileSync(distFile, distContent);
@@ -59,6 +63,7 @@ function build() {
     console.log(`Files:`);
     console.log(`  - ${versionedFile}`);
     console.log(`  - ${distFile}`);
+    console.log(`  - URLs: ${versionedUrl}`);
 }
 
 build();
